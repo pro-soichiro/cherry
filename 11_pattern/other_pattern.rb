@@ -71,7 +71,7 @@ match_class =
     '文字列です'
   end
 p match_class
-
+#=> "文字列です"
 
 
 # variableパターン
@@ -85,6 +85,98 @@ p result
 #=> "obj=Alice"
 # あらゆるオブジェクトがマッチし、変数objに代入される。
 
+# in節で事前に定義した変数の値を参照する
 # ピン演算子
+
+alice = 'Alice'
+bob = 'Bob'
+name = 'Bob'
+
+result =
+  case name
+  in ^alice
+    'aliceさん、こんにちは！'
+  in ^bob
+    'bobさん、こんにちは！'
+  end
+p result
+#=> 'bobさん、こんにちは！'
+
+
+# 配列をパターンマッチ
+
+result =
+  case [1, [2, 3]]
+  in [a,b]
+    "a=#{a}, b=#{b}"
+  end
+p result
+#=> "a=1, b=[2, 3]"
+
+
+# 配列の中の様々なクラスをマッチさせる
+
+result =
+  case ['Alice',999,3,['a','b']]
+  in [String, 10..., n, Array]
+    "n=#{n}"
+  end
+p result
+#=> "n=3"
+
+
+# アンダースコアで「任意の要素」を表現する
+
+result =
+  case [1,2,3]
+  in [_,_,3]
+    'matched'
+  end
+p result
+#=> "matched"
+
+
+# hashをパターンマッチする
+
+result =
+  case { name: 'Alice', age: 20, gender: :female }
+  in { name: 'Alice', **rest}
+    "rest=#{rest}"
+  end
+p result
+#=> "rest={:age=>20, :gender=>:female}"
+
+# 配列も同様にパターンの{}や[]などの記号は省略可能
+result =
+  case { name: 'Alice', age: 20, gender: :female }
+  in name: 'Alice', **rest
+    "rest=#{rest}"
+  end
+p result
+#=> "rest={:age=>20, :gender=>:female}"
+
+
+
+# asパターン
+# パターンを値で行いたいが、ローカル変数としても使用したい場合
+
+result =
+  case {name: 'Alice', age: 20, gender: :female}
+  in {name: String => name, age: 18.. => age}
+    "name=#{name}, age=#{age}"
+  end
+p result
+#=> "name=Alice, age=20"
+
+
+result =
+  case {name: 'Alice', age: 20, gender: :female}
+  in {name: String, age: 18..} => person
+    "person=#{person}"
+  end
+p result
+#=> "person={:name=>\"Alice\", :age=>20, :gender=>:female}"
+
+
 
 
