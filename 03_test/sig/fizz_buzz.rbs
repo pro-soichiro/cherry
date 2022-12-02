@@ -1,0 +1,11 @@
+# Classes
+
+class Object
+  private
+  def fizz_buzz: (Integer n) -> String
+end
+
+class FizzBuzzTest
+  def test_fizz_buzz: -> untyped
+  def assert_equal: (untyped, untyped) -> void
+end

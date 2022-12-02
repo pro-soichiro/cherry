@@ -1,0 +1,10 @@
+require 'rake/testtask'
+
+Rake::TestTask.new do |t|
+  # testディレクトリ以下にある、
+  # _test.rbという名前で終わるファイルを実行対象とする
+  t.pattern = 'test/**/*_test.rb'
+end
+
+task default: :test
+

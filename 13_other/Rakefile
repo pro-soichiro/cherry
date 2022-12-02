@@ -1,0 +1,80 @@
+# Rake
+
+desc 'テスト用のタスクです'
+task :hello_world do
+  puts 'Hello, world!'
+end
+
+=begin
+
+- タスクの実行
+<コマンド>
+rake hello_world
+
+<実行結果>
+Hello, world!
+
+
+- タスクの一覧を説明つきで出力
+<コマンド>
+rake -T
+
+<実行結果>
+rake hello_world  # テスト用のタスクです
+
+=end
+
+
+
+namespace :export_feed do
+  desc 'indeedへのXML出力です'
+  task :indeed do
+    puts 'export XML for indeed'
+  end
+
+  desc 'stanbyへのXML出力です'
+  task :stanby do
+    puts 'export XML for stanby'
+  end
+end
+
+=begin
+
+- タスク一覧
+<コマンド>
+rake -T
+
+<実行結果>
+rake export_feed:indeed  # indeedへのXML出力です
+rake export_feed:stanby  # stanbyへのXML出力です
+rake hello_world         # テスト用のタスクです
+
+- stanbyへのXML出力のみ実行したい場合
+<コマンド>
+rake export_feed:stanby
+
+<実行結果>
+export XML for stanby
+
+=end
+
+
+=begin
+使用例
+
+テストを一括実行したい場合
+
+=end
+
+require 'rake/testtask'
+
+Rake::TestTask.new do |t|
+  # testディレクトリ以下にある、
+  # _test.rbという名前で終わるファイルを実行対象とする
+  t.pattern = 'test/**/*_test.rb'
+end
+
+task default: :test
+
+
+

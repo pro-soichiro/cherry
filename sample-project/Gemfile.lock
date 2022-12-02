@@ -1,0 +1,19 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    awesome_print (1.9.2)
+    concurrent-ruby (1.1.10)
+    faker (2.16.0)
+      i18n (>= 1.6, < 2)
+    i18n (1.12.0)
+      concurrent-ruby (~> 1.0)
+
+PLATFORMS
+  x86_64-darwin-21
+
+DEPENDENCIES
+  awesome_print
+  faker (= 2.16.0)
+
+BUNDLED WITH
+   2.2.3
